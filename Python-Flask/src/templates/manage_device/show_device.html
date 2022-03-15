@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<header>
+    <!-- bootstrap v5.1 - css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- bootstrap v5.1 - js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</header>
+
+<body>
+    <style>
+        body {
+            text-align: center;
+            padding-top: 3%;
+            padding-left: 10%;
+            padding-right: 10%;
+
+        }
+    </style>
+
+    <div class="container">
+        <h2>Step: 1</h2>
+        <h3>Show Room</h3>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>Room Name</th>
+                    <th>Room Key</th>
+                    <th>Open Time</th>
+                    <th>Close Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in rooms %}
+                <tr>
+                    <td>{{room["room_name"]}}</td>
+                    <td>{{room["id"]}}</td>
+                    <td>{{room["opened"]}}</td>
+                    <td>{{room["closed"]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <br>
+
+        <h2>Step: 2</h2>
+        <h3>Create Match Camera & Room</h3>
+        <form method="POST" action="{{url_for('manage_device_bp.show_device')}}">
+            <div class="input-group mb-3">
+                <input type="text" name="SN" class="form-control" placeholder="Device SN">
+                <input type="text" name="RoomKey" class="form-control" placeholder="Room Key">
+                <div class="input-group-append" id="button-addon">
+                    <button class="btn btn-outline-primary" type="submit" value="update">Create new</button>
+                </div>
+            </div>
+        </form>
+
+        <h3>Show Match Camera & Room</h3>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>SN</th>
+                    <th>Room Key</th>
+                    <th>Room Name</th>
+                    <th>Open Time</th>
+                    <th>Close Time</th>
+                    <th>In</th>
+                    <th>Out</th>
+                    <th>Current</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for device in devices %}
+                <tr>
+                    <td>{{ device.id }}</td>
+                    <td>{{ device.SN }}</td>
+                    <td>{{ device.RoomKey }}</td>
+                    <td>{{ device.RoomName }}</td>
+                    <td>{{ device.OpenTime }}</td>
+                    <td>{{ device.CloseTime }}</td>
+                    <td>{{ device.In }}</td>
+                    <td>{{ device.Out }}</td>
+                    <td>{{ device.Current }}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" class="btn btn-danger"
+                                onclick="redirect('/manage_device/delete_device/{{device.id}}')"
+                                data-target="/manage_device/delete_device/{{device.id}}">Delete</button>
+
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <script type="text/javascript">
+        function redirect(link) {
+            window.location.href = link;
+        }
+    </script>
+</body>
+
+</html>

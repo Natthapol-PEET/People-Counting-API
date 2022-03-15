@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    body {
+        text-align: center;
+    }
+
+    form {
+        display: inline-block;
+    }
+</style>
+
+<body>
+    <script>
+        let passwd = prompt('Password');
+        // let bar = confirm('Confirm or deny');
+        console.log(passwd);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.responseType = 'json';
+        xhttp.open("POST", "http://localhost:5000/people_counting/auth", true);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        xhttp.onload = function () {
+            var jsonResponse = xhttp.response;
+            document.getElementsByTagName("BODY")[0].innerHTML = jsonResponse.data;
+        };
+        xhttp.send(passwd);
+    </script>
+</body>
+</html>

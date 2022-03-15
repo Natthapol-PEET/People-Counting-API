@@ -1,0 +1,45 @@
+
+
+
+Clear database tables
+    cache_data              -1 day
+    cache_response          -1 day
+    cache_status            -1 day
+    summary                 -10 day
+
+
+
+            61f0d6a8f7a22300bf395869	Kids’ Learning Space	พื้นที่การเรียนรู้สำหรับเด็ก
+            61f0d690f7a22300bf395868	Yoga Room		        ห้องโยคะ
+AACD7ED2    61f0d65ff7a22300bf395866	Grand Gym		        แกรนด์ยิม
+BB89828E	61f0d5d43cd3e300af0e957a	Sky Pool		        สระว่ายน้ำลอยฟ้าน
+
+
+1. register_device
+{
+    "SN": "AACD7ED2",
+    "Position": "Grand Gym"
+}
+{
+    "SN": "BB89828E",
+    "Position": "Sky Pool"
+}
+
+2. register_match_device
+{
+    "Room": "Kids’ Learning Space",
+    "Room_ID": "61f0d6a8f7a22300bf395869"
+}
+{
+    "Room": "Yoga Room",
+    "Room_ID": "61f0d690f7a22300bf395868"
+}
+{
+    "Room": "Grand Gym",
+    "Room_ID": "61f0d65ff7a22300bf395866"
+}
+{
+    "Room": "Sky Pool",
+    "Room_ID": "61f0d5d43cd3e300af0e957a"
+}
+

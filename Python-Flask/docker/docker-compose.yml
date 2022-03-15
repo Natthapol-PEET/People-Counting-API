@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+    db:
+        container_name: vehicle_management_postgres_db_1
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_USER: lifestyle
+            POSTGRES_PASSWORD: lifestyle_tech
+            POSTGRES_DB: vehicle_management
+        ports:
+            - 5432:5432
+        volumes:
+            - $HOME/Desktop/PostgreSql-Snippets/infile:/infile
+            - pg_data:/var/lib/postgresql/data/
+
+    api:
+        container_name: vehicle_management_fastapi
+        build: .
+        command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn app.main:app --host 0.0.0.0 --reload'
+        ports:
+            - 8080:8000
+        depends_on:
+            - db
+        volumes:
+            - ./app:/src/app
+volumes:
+    pg_data: 
